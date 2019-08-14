@@ -14,15 +14,39 @@ class MyLocationViewController: UIViewController {
     var topNaviView = TopNaviView()
     var listCollectionView = ListCollectionView()
     let notiCenter = NotificationCenter.default
-    
+    fileprivate let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        WebAPI.shared.getTestAPI { [weak self] (listData) in
-            self?.reloadCollectionView()
-            self?.listCollectionView.listSenderData = listData
-        }
+//        WebAPI.shared.getTestAPI { [weak self] (listData) in
+//            self?.reloadCollectionView()
+//            self?.listCollectionView.listSenderData = listData
+//          self?.listCollectionView.listMotelData = listData.filter {
+//            $0.category == "모텔"
+//            }
+//            self?.listCollectionView.listHotelData = listData.filter {
+//                $0.category == "호텔/리조트"
+//            }
+//
+//        }
+        
+        
+        detailRegionSearch(searchKeyword: singleTon.searchKeyword, personnel: singleTon.numberOfPeople, requestCheckIn: self.formatter.string(from: singleTon.saveDate[0])+singleTon.checkInTime, requestCheckOut: self.formatter.string(from: singleTon.saveDate[1])+singleTon.checkOutTime, filter: singleTon.filter,category:singleTon.category , completion: {
+            self.listCollectionView.listSenderData = singleTon.saveDetailSearchList
+            self.listCollectionView.listMotelData = self.listCollectionView.listSenderData.filter {
+                $0.category == "모텔"
+            }
+            self.listCollectionView.listHotelData = self.listCollectionView.listSenderData.filter {
+                $0.category == "호텔/리조트"
+            }
+            print("호텔은 들어가나?,",self.listCollectionView.listHotelData)
+        })
+        
         
         navigationController?.isNavigationBarHidden = true
         configureViewComponents()

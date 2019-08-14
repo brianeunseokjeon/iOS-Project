@@ -22,8 +22,10 @@ class SingleTon {
     var tomorrowString = ""
     var saveDate: [Date] = []
     var selectDateButtonCurrentTitle = ""
-    
-    
+    // 위치
+    var searchKeyword = "서울특별시 강남구"
+    //
+    var category = ""
     //사람수 관련!
     var adultCount = 2
     var childCount = 0
@@ -39,17 +41,17 @@ class SingleTon {
     var checkInDateString = "8월 13일 (화)"
     var checkOutDateString = "8월 15일 (목)"
     
-    var saveDetailSearchList: [SearchStruct] = []
+    var saveDetailSearchList: [StayListElement] = []
     
     // 돈관련
     var money = "70000"
     
     //지역검색시..
-    var saveRegionSearchList: [SearchStruct] = []
+    var saveRegionSearchList: [StayListElement] = []
     var stayID: Int = 0
     var roomID: Int = 0
 
-// filter
+    // filter
     var filter = ""
     
     //로그인시..

@@ -93,7 +93,6 @@ class FilterViewController: UIViewController {
         if let filterThemeCell = filterTableView.cellForRow(at: [0,1]) as? FilterThemeCell {
             for x in 0...15 {
                 if let CollectionViewCell = filterThemeCell.collectionView.cellForItem(at: [0,x]) as? FilterThemeCollectionViewCell {
-                    print(1)
                     CollectionViewCell.button.isSelected = false
                     
                 }
@@ -105,13 +104,14 @@ class FilterViewController: UIViewController {
             filterCharacterCell.lowerPriceButton.isSelected = false
             filterCharacterCell.goodStayButton.isSelected = false
         }
-        if let filterPriceCell = filterTableView.cellForRow(at: [0,2]) as? FilterPriceCell {
-            filterPriceCell.slider
+        if let filterPriceCell = filterTableView.cellForRow(at: [0,3]) as? FilterPriceCell {
+            filterPriceCell.slider.value = filterPriceCell.slider.maximumValue
         }
         
     }
     @objc func adaptFilter() {
         if let vc = presentingViewController as? MyLocationViewController {
+            
             vc.listCollectionView.reloadData()
         }
         dismiss(animated: true, completion: nil)

@@ -15,10 +15,20 @@ class ListCollectionView: UIView {
     
     var listSenderData = [StayListElement]() {
         didSet {
-            //            pageCollectionView.cellForItem(at: IndexPath(item: 0, section: 0) as? )
             reloadData()
         }
     }
+    var listMotelData = [StayListElement]() {
+        didSet {
+            reloadData()
+        }
+    }
+    var listHotelData = [StayListElement]() {
+        didSet {
+            reloadData()
+        }
+    }
+    
     
     
     let pageCollectionView: UICollectionView = {
@@ -55,7 +65,9 @@ class ListCollectionView: UIView {
     }
     
     func reloadData() {
-        pageCollectionView.reloadData()
+        DispatchQueue.main.async {
+            self.pageCollectionView.reloadData()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -107,10 +119,22 @@ extension ListCollectionView: UICollectionViewDataSource {
         
         // 여기서 카테고리 나눠야할듯?
         switch indexPath.item {
-        case 0...1:
+        case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
             if !listSenderData.isEmpty {
                 cell.configureObject(data: listSenderData)
+            }
+            return cell
+        case 1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+            if !listMotelData.isEmpty {
+                cell.configureObject(data: listMotelData)
+            }
+            return cell
+        case 2:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionViewCell.reusableIdentifier, for: indexPath) as! CustomCollectionViewCell
+            if !listHotelData.isEmpty {
+                cell.configureObject(data: listHotelData)
             }
             return cell
         case 5...7:
