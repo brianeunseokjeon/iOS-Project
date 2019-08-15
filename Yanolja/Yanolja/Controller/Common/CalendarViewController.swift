@@ -23,7 +23,7 @@ class CalendarViewController: UIViewController {
     var calendarHeightConstraint: NSLayoutConstraint?
     fileprivate let formatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "yyyy-MM-dd-E"
         return formatter
     }()
     fileprivate let gregorian: NSCalendar! = NSCalendar(calendarIdentifier:NSCalendar.Identifier.gregorian)
@@ -48,6 +48,7 @@ class CalendarViewController: UIViewController {
         calenderFeat()
         calenderInitSelectDates()
         print("viewDidLoad :",singleTon.saveDate)
+        print("요일 저장되나",formatter.string(from: singleTon.saveDate[0]))
     }
     
     
@@ -104,7 +105,6 @@ class CalendarViewController: UIViewController {
         sundayLabel.textColor = .red
         
         mondayLabel.text = "월"
-        //        mondayLabel.textColor = .black
         tuedayLabel.text = "화"
         weddayLabel.text = "수"
         thudayLabel.text = "목"
