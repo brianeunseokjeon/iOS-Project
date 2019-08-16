@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HomeThemeCollectionViewCell: UICollectionViewCell {
     
@@ -92,7 +93,10 @@ class HomeThemeCollectionViewCell: UICollectionViewCell {
     
     // MARK: - configuration global method
     func configureCellContent(image: String, title: String, price: String) {
-        imageView.downloadImageFrom(image, contentMode: .scaleAspectFill)
+//        imageView.kf.setImage(with: URL(string: image))
+        imageView.kf.setImage(with: URL(string: image), options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 50, height: 50))), .scaleFactor(UIScreen.main.scale)])
+
+//        imageView.downloadImageFrom(image, contentMode: .scaleAspectFill)
         titleLabel.text = title
         priceLabel.text = price
     }

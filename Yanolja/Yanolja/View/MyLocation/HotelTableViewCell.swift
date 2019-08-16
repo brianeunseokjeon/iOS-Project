@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HotelTableViewCell: UITableViewCell {
     
@@ -340,7 +341,12 @@ class HotelTableViewCell: UITableViewCell {
     }
     
     func put(mainImage:String,stay:String, averageGrade: Double ,totalComments:Int,ownerComments:Int ,directions:String , daysPrice:String) {
-        cellImage.downloadImageFrom(mainImage, contentMode: .scaleAspectFill)
+//        cellImage.downloadImageFrom(mainImage, contentMode: .scaleAspectFill)
+//        cellImage.kf.setImage(with: URL(string: mainImage))
+        
+        cellImage.kf.setImage(with: URL(string: mainImage), options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 100, height: 100))), .scaleFactor(UIScreen.main.scale)])
+
+
         self.hotelTitle.text = stay
         ratingLabel.text = "\(averageGrade)"
         commentLabel.text = "\(totalComments)"

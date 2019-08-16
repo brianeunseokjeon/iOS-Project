@@ -26,6 +26,9 @@ class SingleTon {
     var searchKeyword = "서울특별시 강남구"
     //
     var category = ""
+    //
+    var stayTitle = ""
+    var roomTitle = ""
     //사람수 관련!
     var adultCount = 2
     var childCount = 0

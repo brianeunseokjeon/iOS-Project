@@ -239,6 +239,9 @@ class RoomDetailViewController: UIViewController {
     }
     
     @objc private func stayReservation(_ sender: UIButton) {
+        singleTon.stayTitle = roomListData[0].stay
+        singleTon.roomTitle = roomListData[0].name
+
         if singleTon.token == "" {
             present(LoginViewController(), animated: true, completion: nil)
         } else {
@@ -258,6 +261,7 @@ extension RoomDetailViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: RoomInfoTableViewCell.reusableIdentifier, for: indexPath) as! RoomInfoTableViewCell
             cell.title.text = roomListData[0].name
             cell.hotelName.text = roomListData[0].stay
+            
             
             return cell
         case 1:

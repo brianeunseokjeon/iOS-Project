@@ -7,6 +7,7 @@ target 'Yanolja' do
 pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'Alamofire', '~> 5.0.0-beta.5'
+pod 'Kingfisher'
   # Pods for Yanolja
 
 end

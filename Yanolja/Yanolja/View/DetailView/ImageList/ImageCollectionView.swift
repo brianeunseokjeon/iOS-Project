@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ImageCollectionView: UITableViewCell {
     
@@ -146,7 +147,11 @@ extension ImageCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailImageCollectionViewCell.reusableIdentifier, for: indexPath) as! DetailImageCollectionViewCell
-        cell.imageView.downloadImageFrom(saveImageList[indexPath.row], contentMode: .scaleAspectFill)
+//        cell.imageView.kf.setImage(with: URL(string: saveImageList[indexPath.row]))
+
+        cell.imageView.kf.setImage(with: URL(string: saveImageList[indexPath.row]), options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 100, height: 100))), .scaleFactor(UIScreen.main.scale)])
+
+//        cell.imageView.downloadImageFrom(saveImageList[indexPath.row], contentMode: .scaleAspectFill)
         
         return cell
     }

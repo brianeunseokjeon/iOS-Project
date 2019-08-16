@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Kingfisher
 class MotelTableViewCell: UITableViewCell {
     
     // MARK: - Properties
@@ -460,7 +460,11 @@ class MotelTableViewCell: UITableViewCell {
         }
     }
     func put(mainImage:String,stay:String, averageGrade: Double ,totalComments:Int,ownerComments:Int ,directions:String , daysPrice:String, hoursAvailable: Int, hoursPrice: String, daysCheckIn: Int, saleHoursPrice: String, saleDaysPrice: String) {
-        hotelImage.downloadImageFrom(mainImage, contentMode: .scaleAspectFill)
+//        hotelImage.kf.setImage(with: URL(string: mainImage))
+        hotelImage.kf.setImage(with: URL(string: mainImage), options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 100, height: 100))), .scaleFactor(UIScreen.main.scale)])
+
+        
+//        hotelImage.downloadImageFrom(mainImage, contentMode: .scaleAspectFill)
         hotelTitle.text = stay
         rentableRoomSubTitle.text = "최대 \(hoursAvailable)시간"
         rentableRoomCancelPrice.text = "\(saleHoursPrice)원"
@@ -476,7 +480,10 @@ class MotelTableViewCell: UITableViewCell {
     
     
     func puts(mainImage:String,stay:String, averageGrade: Double ,totalComments:Int,ownerComments:Int ,directions:String ,hoursAvailable:Int, daysPrice:String,saleDaysPrice:String) {
-        hotelImage.downloadImageFrom(mainImage, contentMode: .scaleAspectFill)
+//        hotelImage.kf.setImage(with: URL(string: mainImage))
+        hotelImage.kf.setImage(with: URL(string: mainImage), options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 100, height: 100))), .scaleFactor(UIScreen.main.scale)])
+
+//        hotelImage.downloadImageFrom(mainImage, contentMode: .scaleAspectFill)
         self.hotelTitle.text = stay
         gradeRate.text = "\(averageGrade)"
         commentLabel.text = "\(totalComments)"

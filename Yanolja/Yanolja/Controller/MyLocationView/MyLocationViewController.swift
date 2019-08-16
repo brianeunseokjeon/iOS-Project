@@ -44,7 +44,7 @@ class MyLocationViewController: UIViewController {
             self.listCollectionView.listHotelData = self.listCollectionView.listSenderData.filter {
                 $0.category == "호텔/리조트"
             }
-            print("호텔은 들어가나?,",self.listCollectionView.listHotelData)
+//            print("호텔은 들어가나?,",self.listCollectionView.listHotelData)
         })
         
         

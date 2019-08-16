@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class RoomListTableViewCell: UITableViewCell {
 
@@ -304,7 +305,10 @@ class RoomListTableViewCell: UITableViewCell {
         basicInfo: [String],
         urlImage: String
         ) {
-        roomImage.downloadImageFrom(urlImage, contentMode: .scaleAspectFill)
+//        roomImage.kf.setImage(with: URL(string: urlImage))
+        roomImage.kf.setImage(with: URL(string: urlImage), options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 50, height: 50))), .scaleFactor(UIScreen.main.scale)])
+
+//        roomImage.downloadImageFrom(urlImage, contentMode: .scaleAspectFill)
         roomTitle.text = name
         roomPeople.text = "기준 \(standardPersonnel) / 최대 \(maximumPersonnel)"
         rentableRoomTimeLabel.text = "최대 \(hoursAvailable)시간"
