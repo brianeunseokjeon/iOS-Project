@@ -110,11 +110,21 @@ class FilterViewController: UIViewController {
         
     }
     @objc func adaptFilter() {
-        if let vc = presentingViewController as? MyLocationViewController {
-            
-            vc.listCollectionView.reloadData()
+//        if let homeTabBarController = presentingViewController as? CustomTabBarController {
+//            homeTabBarController.selectedIndex = 2
+//            homeTabBarController.dismiss(animated: true, completion: nil)
+//        }
+        if let vc1 = presentingViewController as? CustomTabBarController {
+            vc1.selectedIndex = 2
+            let vc = (vc1.viewControllers?[3] as? MyLocationViewController)!
+            if singleTon.filter == "priceHigh" {
+                print("1눌림")
+                vc.listCollectionView.listMotelData.sort(by: {Int($0.saleDaysPrice)! > Int($1.saleDaysPrice)!})
+                vc.listCollectionView.reloadData()
+
+                dismiss(animated: true, completion: nil)
+            }
         }
-        dismiss(animated: true, completion: nil)
     }
 }
 

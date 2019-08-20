@@ -134,6 +134,7 @@ class FilterSortCell: UITableViewCell {
         
         let filterString = ["","review","wish","priceHigh","priceLow"]
         singleTon.filter = filterString[button.tag]
+        print(singleTon.filter)
     }
   
     private func initButtonSelect() {

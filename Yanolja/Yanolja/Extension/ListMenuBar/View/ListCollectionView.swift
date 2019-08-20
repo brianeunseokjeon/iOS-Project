@@ -13,11 +13,7 @@ class ListCollectionView: UIView {
     var sum: CGFloat = 0
     var space: CGFloat = 10
     
-    var listSenderData = [StayListElement]() {
-        didSet {
-            reloadData()
-        }
-    }
+    var listSenderData = [StayListElement]()
     var listMotelData = [StayListElement]() {
         didSet {
             reloadData()

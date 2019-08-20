@@ -30,28 +30,14 @@ func detailRegionSearch(searchKeyword:String, personnel:Int,requestCheckIn:Strin
         guard let data = data else {
             return print("Error: did not receive data")
         }
-        guard let regionData = try? JSONSerialization.jsonObject(with: data) as? [[String:Any]] else { return print("Could not get parsed data")}
         singleTon.saveDetailSearchList.removeAll()
-        
-        for x in regionData {
-            
-            guard let directions = x["directions"] as? String ,
-                let mainImage = x["mainImage"] as? String,
-                let category = x["category"] as? String,
-                let stay = x["stay"] as? String,
-                let stayId = x["stayId"] as? Int,
-                let totalComments = x["totalComments"] as? Int,
-                let averageGrade = x["averageGrade"] as? Double,
-                let ownerComments = x["ownerComments"] as? Int,
-                let hoursPrice = x["hoursPrice"] as? String,
-                let hoursAvailable = x["hoursAvailable"] as? Int,
-                let saleHoursPrice = x["saleHoursPrice"] as? String,
-                let daysCheckIn = x["daysCheckIn"] as? Int,
-                let daysPrice = x["daysPrice"] as? String,
-                let saleDaysPrice = x["saleDaysPrice"] as? String else {return}
-            let temp = StayListElement(directions: directions, mainImage: mainImage, category: category, stay: stay, stayID: stayId, totalComments: totalComments, averageGrade: averageGrade, ownerComments: ownerComments, hoursPrice: hoursPrice, hoursAvailable: hoursAvailable, saleHoursPrice: saleHoursPrice, daysCheckIn: daysCheckIn, daysPrice: daysPrice, saleDaysPrice: saleDaysPrice)
-            singleTon.saveDetailSearchList.append(temp)
+        do {
+            let regionData = try JSONDecoder().decode([StayListElement].self, from: data)
+            singleTon.saveDetailSearchList = regionData
+        } catch {
+            print(error.localizedDescription)
         }
+        
         completion()
     }
     task.resume()
@@ -80,28 +66,14 @@ func regionSearch(selectRegion:String, category:String,personnel:Int,requestChec
         guard let data = data else {
             return print("Error: did not receive data")
         }
-        guard let regionData = try? JSONSerialization.jsonObject(with: data) as? [[String:Any]] else { return print("Could not get parsed data")}
-        //                print(response.statusCode) // print 201 나옴.
-        singleTon.saveRegionSearchList.removeAll()
-        for x in regionData {
-            
-            guard let directions = x["directions"] as? String ,
-                let mainImage = x["mainImage"] as? String,
-                let category = x["category"] as? String,
-                let stay = x["stay"] as? String,
-                let stayId = x["stayId"] as? Int,
-                let totalComments = x["totalComments"] as? Int,
-                let averageGrade = x["averageGrade"] as? Double,
-                let ownerComments = x["ownerComments"] as? Int,
-                let hoursPrice = x["hoursPrice"] as? String,
-                let hoursAvailable = x["hoursAvailable"] as? Int,
-                let saleHoursPrice = x["saleHoursPrice"] as? String,
-                let daysCheckIn = x["daysCheckIn"] as? Int,
-                let daysPrice = x["daysPrice"] as? String,
-                let saleDaysPrice = x["saleDaysPrice"] as? String else {return}
-            let temp = StayListElement(directions: directions, mainImage: mainImage, category: category, stay: stay, stayID: stayId, totalComments: totalComments, averageGrade: averageGrade, ownerComments: ownerComments, hoursPrice: hoursPrice, hoursAvailable: hoursAvailable, saleHoursPrice: saleHoursPrice, daysCheckIn: daysCheckIn, daysPrice: daysPrice, saleDaysPrice: saleDaysPrice)
-            singleTon.saveRegionSearchList.append(temp)
+       singleTon.saveRegionSearchList.removeAll()
+        do {
+            let regionData = try JSONDecoder().decode([StayListElement].self, from: data)
+            singleTon.saveRegionSearchList = regionData
+        } catch {
+            print(error.localizedDescription)
         }
+        
         completion()
     }
     task.resume()
