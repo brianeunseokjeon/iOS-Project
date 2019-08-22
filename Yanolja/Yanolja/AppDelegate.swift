@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.backgroundColor = .white
         window?.rootViewController = LaunchViewController()
-//        window?.rootViewController = CustomTabBarController()
+//        window?.rootViewController = SearchViewController()
         window?.makeKeyAndVisible()
         
         return true
