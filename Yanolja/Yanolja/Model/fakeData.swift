@@ -145,8 +145,8 @@ let keyWords: [keyWord] = [
 
 let loginMenuTitle = ["야놀자 로그인", "간편 로그인"]
 
-let numberOne = "서울호캉스"
+let numberOne = "서울재밌는곳"
 let numberTwo = "서울수영장호텔"
 let numberThree = "전은석"
 let numberFour = "징배공기배"
-let numberFive = "코타키나발루호텔"
+let numberFive = "호텔은석"
