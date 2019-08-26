@@ -66,7 +66,6 @@ class WebAPI {
         AF.request(url, method: .get).responseJSON { (response) in
             guard let data = response.data else {return}
             do{
-                print("#### :", url)
                 let result = try JSONDecoder().decode(RoomDetailElement.self, from: data)
                 completed(result)
             }
@@ -74,6 +73,5 @@ class WebAPI {
                 print("error :", error)
             }
         }
-        print("$$$$ :", url)
     }
 }

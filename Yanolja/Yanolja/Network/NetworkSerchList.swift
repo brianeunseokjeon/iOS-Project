@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 // 돋보기 눌렀을때 서치할 수 있는
 func detailRegionSearch(searchKeyword:String, personnel:Int,requestCheckIn:String,requestCheckOut:String,filter:String="",category:String="" ,completion: @escaping () -> ()) {
@@ -128,3 +129,5 @@ func reserve(roomNumber:Int,booker:String, phoneNumber:String, wayToGo:String, r
     }
     task.resume()
 }
+
+//alamofire 다시적용!
