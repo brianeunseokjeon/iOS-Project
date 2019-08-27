@@ -21,27 +21,20 @@ func detailRegionSearch(searchKeyword:String, personnel:Int,requestCheckIn:Strin
     }
     var urlRequest = URLRequest(url: url)
     urlRequest.httpMethod = "GET"
-    
-    let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-        guard error == nil else { return print(error!.localizedDescription)}
-        guard let response = response as? HTTPURLResponse,
-            200..<300 ~= response.statusCode ,
-            response.mimeType == "application/json"
-            else { return print("StatusCode is not valid")}
-        guard let data = data else {
-            return print("Error: did not receive data")
-        }
-        singleTon.saveDetailSearchList.removeAll()
-        do {
-            let regionData = try JSONDecoder().decode([StayListElement].self, from: data)
-            singleTon.saveDetailSearchList = regionData
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        completion()
-    }
-    task.resume()
+    singleTon.saveDetailSearchList.removeAll()
+    AF.request(url, method: .get)
+        .validate()
+        .response(completionHandler: { (response) in
+            guard let data = response.data else {return print("data error") }
+            do {
+                let regionData = try JSONDecoder().decode([StayListElement].self, from: data)
+                singleTon.saveDetailSearchList = regionData
+            } catch {
+                print(error.localizedDescription)
+            }
+            completion()
+        })
+   
 }
 
 // 지역 버튼 눌렀을때 가능..
@@ -58,26 +51,20 @@ func regionSearch(selectRegion:String, category:String,personnel:Int,requestChec
     var urlRequest = URLRequest(url: url)
     urlRequest.httpMethod = "GET"
     
-    let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-        guard error == nil else { return print(error!.localizedDescription)}
-        guard let response = response as? HTTPURLResponse,
-            200..<300 ~= response.statusCode ,
-            response.mimeType == "application/json"
-            else { return print("StatusCode is not valid")}
-        guard let data = data else {
-            return print("Error: did not receive data")
-        }
-       singleTon.saveRegionSearchList.removeAll()
-        do {
-            let regionData = try JSONDecoder().decode([StayListElement].self, from: data)
-            singleTon.saveRegionSearchList = regionData
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        completion()
-    }
-    task.resume()
+    singleTon.saveRegionSearchList.removeAll()
+
+    AF.request(url, method: .get)
+        .validate()
+        .response(completionHandler: { (response) in
+            guard let data = response.data else {return print("data error") }
+            do {
+                let regionData = try JSONDecoder().decode([StayListElement].self, from: data)
+                singleTon.saveRegionSearchList = regionData
+            } catch {
+                print(error.localizedDescription)
+            }
+            completion()
+        })
 }
 
 
@@ -98,36 +85,19 @@ func reserve(roomNumber:Int,booker:String, phoneNumber:String, wayToGo:String, r
  // FIXME: -토큰이 문제임..ㅠㅠ
     urlRequest.addValue("Token 2242861fd6fe94d2a2ea809e6eb57a07ed1ea8d5", forHTTPHeaderField: "Authorization")
   
-    let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-        guard error == nil else {
-            print(error!.localizedDescription)
-            return
-        }
-        guard let response = response as? HTTPURLResponse,
-            200..<300 ~= response.statusCode ,
-            response.mimeType == "application/json"
-            else {
-   // FIXME: - //예약이 불가능할경우 역기로 들어옴..;;
-                completion(false)
-                print("StatusCode is not valid")
-                return
-        }
-        guard let data = data else {
-            print("Error: did not receive data")
-            return
-        }
+    AF.request(urlRequest).validate().responseData { (response) in
+        guard let data = response.data else {return print("data error")}
         guard let statusOfResereved = try? JSONSerialization.jsonObject(with: data) as? [String:Any] else {
             print("Could not get parsed data")
             return
         }
-        print(response.statusCode) // print 201 나옴.
         guard let boolValue = statusOfResereved["reserved"] as? Bool else {
-            return print("오류")
+            return completion(false)
         }
         print(boolValue,"예약완료")
         completion(boolValue)
+        
     }
-    task.resume()
 }
 
 //alamofire 다시적용!
