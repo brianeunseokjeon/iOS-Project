@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 class WebAPI {
-
+    
     static let shared = WebAPI()
     private init() {}
     
@@ -32,7 +32,7 @@ class WebAPI {
         guard let url = URL(string: "http://api.yanoljamvp.com/api/stay/detail/\(stayId)") else { return }
         
         AF.request(url, method: .get).responseJSON { (response) in
-        guard let data = response.data else {return}
+            guard let data = response.data else {return}
             do{
                 let result = try JSONDecoder().decode(StayDetailElement.self, from: data)
                 completed(result)

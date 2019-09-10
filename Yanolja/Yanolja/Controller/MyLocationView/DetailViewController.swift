@@ -329,7 +329,7 @@ extension DetailViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: RoomListTableViewCell.reusableIdentifier, for: indexPath) as! RoomListTableViewCell
             
             if roomListData[indexPath.row - 2].hoursPrice == "0" {
-               roomListData[indexPath.row - 2].hoursPrice = "예약완료"
+                roomListData[indexPath.row - 2].hoursPrice = "예약완료"
             }
             
             if roomListData[indexPath.row - 2].daysPrice == "0" {
@@ -337,8 +337,8 @@ extension DetailViewController: UITableViewDataSource {
             }
             
             cell.fetchRoomListData(name: roomListData[indexPath.row - 2].name, standardPersonnel: roomListData[indexPath.row - 2].standardPersonnel, maximumPersonnel: roomListData[indexPath.row - 2].maximumPersonnel, hoursAvailable: roomListData[indexPath.row - 2].hoursAvailable, daysCheckIn: roomListData[indexPath.row - 2].daysCheckIn, hoursPrice: roomListData[indexPath.row - 2].hoursPrice, saleHoursPrice: roomListData[indexPath.row - 2].saleHoursPrice, daysPrice: roomListData[indexPath.row - 2].daysPrice, saleDaysPrice: roomListData[indexPath.row - 2].saleDaysPrice, basicInfo: roomListData[indexPath.row - 2].basicInfo, urlImage: roomListData[indexPath.row - 2].urlImage[0])
-//            cell.roomImage.image = roomListData[indexPath.row - 2].urlImage[0]
-    
+            //            cell.roomImage.image = roomListData[indexPath.row - 2].urlImage[0]
+            
             cell.roomPeople.text = "기준 \(2)명 / 최대 \(2)명"
             
             cell.rentableRoomTitle.text = "대실"
@@ -346,7 +346,7 @@ extension DetailViewController: UITableViewDataSource {
             
             cell.stayRoomTitle.text = "숙박"
             cell.stayRoomPercent.text = "5%"
-//            cell.stayRoomPercent.text = String(Int((Double(roomListData[indexPath.row - 2].hoursPrice)!-Double(roomListData[indexPath.row - 2].saleHoursPrice)!)/Double(roomListData[indexPath.row - 2].hoursPrice)! * 100)) + "%~"
+            //            cell.stayRoomPercent.text = String(Int((Double(roomListData[indexPath.row - 2].hoursPrice)!-Double(roomListData[indexPath.row - 2].saleHoursPrice)!)/Double(roomListData[indexPath.row - 2].hoursPrice)! * 100)) + "%~"
             
             return cell
             

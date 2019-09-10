@@ -167,7 +167,7 @@ extension LoginViewController: UICollectionViewDataSource {
                             self.present(alertController, animated: true)
                         } else {
                             
-                        // FIXME: - 디스미스할때, 그 뷰 리로드 시켜야함.. 왜냐 셀 바꿔야함.
+                            // FIXME: - 디스미스할때, 그 뷰 리로드 시켜야함.. 왜냐 셀 바꿔야함.
                             
                             singleTon.token = token
                             print("token:", token)
